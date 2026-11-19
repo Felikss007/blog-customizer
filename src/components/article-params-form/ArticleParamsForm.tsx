@@ -2,6 +2,7 @@ import { RadioGroup } from '@/ui/radio-group';
 import { Select } from '@/ui/select';
 import { Separator } from '@/ui/separator';
 import { Text } from '@/ui/text';
+import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import {
   defaultArticleState,
@@ -46,10 +47,9 @@ export const ArticleParamsForm = ({
     };
   }, [isParamsFormOpen]);
 
-  const asideClass = isParamsFormOpen
-    ? `${styles.container} 
-  ${styles.container_open}`
-    : styles.container;
+  const asideClass = clsx(styles.container, {
+    [styles.container_open]: isParamsFormOpen,
+  });
 
   const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
