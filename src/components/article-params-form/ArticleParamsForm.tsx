@@ -91,13 +91,13 @@ export const ArticleParamsForm = ({
             selected={draft.fontColor}
             onChange={(option) => setDraft({ ...draft, fontColor: option })}
           />
+          <Separator />
           <Select
             title="Цвет фона"
             options={backgroundColors}
             selected={draft.backgroundColor}
             onChange={(option) => setDraft({ ...draft, backgroundColor: option })}
           />
-          <Separator />
           <Select
             title="Ширина контента"
             options={contentWidthArr}
