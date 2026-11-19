@@ -26,16 +26,16 @@ type ArticleParamsFormProps = {
 export const ArticleParamsForm = ({
   onApply,
 }: ArticleParamsFormProps): React.JSX.Element => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isParamsFormOpen, setIsParamsFormOpen] = useState(false);
   const [draft, setDraft] = useState<ArticleStateType>(defaultArticleState);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isParamsFormOpen) return;
 
     const handleOutsideClick = (e: MouseEvent): void => {
       if (e.target instanceof Node && !rootRef.current?.contains(e.target)) {
-        setIsOpen(false);
+        setIsParamsFormOpen(false);
       }
     };
 
@@ -44,9 +44,9 @@ export const ArticleParamsForm = ({
     return (): void => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isOpen]);
+  }, [isParamsFormOpen]);
 
-  const asideClass = isOpen
+  const asideClass = isParamsFormOpen
     ? `${styles.container} 
   ${styles.container_open}`
     : styles.container;
@@ -63,7 +63,10 @@ export const ArticleParamsForm = ({
   };
   return (
     <div ref={rootRef}>
-      <ArrowButton isOpen={isOpen} onClick={() => setIsOpen((isOpen) => !isOpen)} />
+      <ArrowButton
+        isOpen={isParamsFormOpen}
+        onClick={() => setIsParamsFormOpen((isOpen) => !isOpen)}
+      />
       <aside className={asideClass}>
         <form className={styles.form} onSubmit={handleSubmit} onReset={handleReset}>
           <Text size={31} as={'h2'} weight={800} uppercase={true}>
